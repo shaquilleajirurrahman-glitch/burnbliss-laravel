@@ -1,0 +1,491 @@
+/* Burn & Bliss — override Bootstrap 5 */
+
+:root {
+    --bb-maroon: #771b19;
+    --bb-maroon-dark: #5c1412;
+    --bb-maroon-soft: rgba(119, 27, 25, 0.08);
+    --bb-cream: #faf9f6;
+    --bb-ink: #2b2220;
+    --bb-line: #e9e4dd;
+
+    --bs-body-font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    --bs-body-color: var(--bb-ink);
+    --bs-body-bg: var(--bb-cream);
+    --bs-link-color-rgb: 119, 27, 25;
+    --bs-link-hover-color-rgb: 92, 20, 18;
+    --bs-border-color: var(--bb-line);
+    --bs-focus-ring-color: rgba(119, 27, 25, 0.25);
+}
+
+.bb-body { background: var(--bb-cream); min-height: 100vh; }
+
+.bb-serif, .bb-brand { font-family: "Noto Serif", Georgia, serif; }
+.text-maroon { color: var(--bb-maroon) !important; }
+
+.bb-brand {
+    color: var(--bb-maroon);
+    font-weight: 700;
+    font-size: 1.35rem;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+}
+.bb-brand:hover { color: var(--bb-maroon-dark); }
+
+.bb-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* ── Tombol ─────────────────────────────────────────────── */
+.btn-maroon {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--bb-maroon);
+    --bs-btn-border-color: var(--bb-maroon);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--bb-maroon-dark);
+    --bs-btn-hover-border-color: var(--bb-maroon-dark);
+    --bs-btn-active-bg: var(--bb-maroon-dark);
+    --bs-btn-active-border-color: var(--bb-maroon-dark);
+    --bs-btn-disabled-bg: var(--bb-maroon);
+    --bs-btn-disabled-border-color: var(--bb-maroon);
+    --bs-btn-focus-shadow-rgb: 119, 27, 25;
+    font-weight: 600;
+}
+.btn-outline-maroon {
+    --bs-btn-color: var(--bb-maroon);
+    --bs-btn-border-color: var(--bb-maroon);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--bb-maroon);
+    --bs-btn-hover-border-color: var(--bb-maroon);
+    --bs-btn-active-color: #fff; /* juga untuk .btn-check:checked (pilihan aktif) */
+    --bs-btn-active-bg: var(--bb-maroon);
+    --bs-btn-active-border-color: var(--bb-maroon);
+    --bs-btn-focus-shadow-rgb: 119, 27, 25;
+    font-weight: 600;
+}
+
+/* Micro-interaction: tombol sedikit terangkat saat hover */
+.btn-maroon, .btn-outline-maroon {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.btn-maroon:hover, .btn-outline-maroon:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -6px rgba(119, 27, 25, 0.55);
+}
+.btn-maroon:active, .btn-outline-maroon:active { transform: translateY(0); box-shadow: none; }
+
+/* ── Form ───────────────────────────────────────────────── */
+.form-control:focus, .form-check-input:focus {
+    border-color: var(--bb-maroon);
+    box-shadow: 0 0 0 0.2rem var(--bs-focus-ring-color);
+}
+.form-check-input:checked { background-color: var(--bb-maroon); border-color: var(--bb-maroon); }
+.form-label { font-weight: 500; font-size: 0.9rem; }
+.bb-link { font-weight: 600; text-decoration: none; }
+.bb-link:hover { text-decoration: underline; }
+
+/* ── Halaman auth ───────────────────────────────────────── */
+.bb-auth-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 2rem;
+}
+.bb-auth-card, .bb-card { --bs-card-bg: #fff; --bs-list-group-bg: #fff; }
+
+.bb-auth-card {
+    max-width: 960px;
+    width: 100%;
+    margin-inline: auto;
+    border: 1px solid var(--bb-line);
+    border-radius: 1.25rem;
+    box-shadow: 0 24px 48px -32px rgba(43, 34, 32, 0.35);
+}
+.bb-auth-panel {
+    padding: 3rem;
+    color: #fff;
+    background:
+        radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.10), transparent 60%),
+        var(--bb-maroon);
+}
+
+/* ── Kartu & navbar ─────────────────────────────────────── */
+.bb-navbar {
+    background: #fff;
+    border-bottom: 1px solid var(--bb-line);
+}
+.bb-nav .nav-link {
+    position: relative;
+    font-weight: 500;
+    color: var(--bb-ink);
+    transition: color 0.15s ease;
+}
+.bb-nav .nav-link:hover, .bb-nav .nav-link.active { color: var(--bb-maroon); }
+/* Micro-interaction: garis bawah tumbuh dari kiri saat hover/aktif (layar lebar) */
+@media (min-width: 992px) {
+    .bb-nav .nav-link::after {
+        content: "";
+        position: absolute;
+        left: var(--bs-navbar-nav-link-padding-x);
+        right: var(--bs-navbar-nav-link-padding-x);
+        bottom: 0.25rem;
+        height: 2px;
+        background: var(--bb-maroon);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+    }
+    .bb-nav .nav-link:hover::after, .bb-nav .nav-link.active::after { transform: scaleX(1); }
+}
+.navbar-toggler:focus { box-shadow: 0 0 0 0.2rem var(--bs-focus-ring-color); }
+.bb-nav .nav-link { white-space: nowrap; }
+.bb-dropdown { --bs-dropdown-link-active-bg: var(--bb-maroon); --bs-dropdown-border-color: var(--bb-line); }
+.bb-dropdown .dropdown-item:hover { background: var(--bb-maroon-soft); color: var(--bb-maroon); }
+
+.bb-card {
+    border: 1px solid var(--bb-line);
+    border-radius: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bb-card:hover {
+    border-color: rgba(119, 27, 25, 0.25);
+    box-shadow: 0 12px 28px -20px rgba(43, 34, 32, 0.35);
+}
+.bb-badge-role { background: var(--bb-maroon-soft); color: var(--bb-maroon); font-weight: 600; }
+.bb-feature-list li { padding: 0.35rem 0; border-bottom: 1px dashed var(--bb-line); }
+.bb-feature-list li:last-child { border-bottom: 0; }
+.bb-feature-list .bi { color: var(--bb-maroon); font-size: 1.25rem; vertical-align: middle; }
+.bb-access-link { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.875rem; }
+.bb-access-link:hover { background: var(--bb-maroon-soft); color: var(--bb-maroon); }
+
+.bb-toast { background: var(--bb-ink); color: #fff; }
+.bb-toast-error { background: var(--bb-maroon); }
+
+/* ── Toko: navbar & badge keranjang ─────────────────────── */
+.bb-cart-link { display: inline-flex; align-items: center; gap: 0.15rem; }
+.bb-cart-badge {
+    background: var(--bb-maroon);
+    color: #fff;
+    font-size: 0.7rem;
+    margin-left: 0.35rem;
+    min-width: 1.4rem;
+}
+/* Micro-interaction: badge "memantul" saat jumlah berubah */
+.bb-bump { animation: bb-bump 0.35s ease; }
+@keyframes bb-bump {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}
+
+/* ── Katalog ────────────────────────────────────────────── */
+.bb-catalog-head { max-width: 40rem; }
+.bb-price { font-weight: 700; color: var(--bb-maroon); }
+.bb-product-img { background: #f1ece6; overflow: hidden; }
+.bb-product-img img { transition: transform 0.4s ease; }
+/* Micro-interaction: foto sedikit membesar saat kartu di-hover */
+.bb-product:hover .bb-product-img img { transform: scale(1.04); }
+.bb-featured-img { min-height: 280px; }
+@media (min-width: 768px) { .bb-featured-img { min-height: 440px; } }
+.bb-stock { font-weight: 600; }
+.bb-stock-low { background: #fdf0d5; color: #8a5a00; }
+.bb-stock-out { background: #eee; color: #666; }
+
+/* ── Keranjang ──────────────────────────────────────────── */
+.bb-cart-thumb { flex-shrink: 0; background: #f1ece6; }
+.bb-cart-name { min-width: 10rem; }
+.bb-stepper { width: auto; }
+.bb-stepper .btn { --bs-btn-border-color: var(--bb-line); }
+.bb-stepper .btn:hover:not(:disabled) { --bs-btn-hover-bg: var(--bb-maroon-soft); --bs-btn-hover-color: var(--bb-maroon); --bs-btn-hover-border-color: var(--bb-line); }
+.bb-stepper-qty { background: #fff; min-width: 2.5rem; justify-content: center; font-weight: 600; }
+.bb-cart-subtotal { min-width: 6.5rem; }
+.bb-remove { color: #8b8580; }
+.bb-remove:hover { color: var(--bb-maroon); }
+.bb-line-busy { opacity: 0.6; transition: opacity 0.15s ease; }
+@media (min-width: 992px) { .bb-summary { position: sticky; top: 5.5rem; } }
+
+/* ── Checkout ───────────────────────────────────────────── */
+.bb-steps { font-size: 0.875rem; }
+.bb-step { display: inline-flex; align-items: center; gap: 0.5rem; color: #8b8580; }
+.bb-step-dot {
+    display: inline-grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--bb-line);
+    background: #fff;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.bb-step.is-active { color: var(--bb-ink); font-weight: 600; }
+.bb-step.is-active .bb-step-dot { background: var(--bb-maroon); border-color: var(--bb-maroon); color: #fff; }
+.bb-step.is-done .bb-step-dot { background: var(--bb-maroon-soft); border-color: transparent; color: var(--bb-maroon); }
+
+/* Pilihan metode pengambilan (radio sebagai kartu) */
+.bb-option {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--bb-line);
+    border-radius: 0.75rem;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.bb-option .bi { color: var(--bb-maroon); }
+.bb-option:hover { border-color: rgba(119, 27, 25, 0.35); }
+.btn-check:checked + .bb-option {
+    border-color: var(--bb-maroon);
+    background: var(--bb-maroon-soft);
+    box-shadow: inset 0 0 0 1px var(--bb-maroon);
+}
+.btn-check:focus-visible + .bb-option { box-shadow: 0 0 0 0.2rem var(--bs-focus-ring-color); }
+
+.bb-summary-list li { padding: 0.4rem 0; }
+.bb-detail-list { display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 1rem; }
+.bb-detail-list dt { font-weight: 500; color: #8b8580; }
+.bb-detail-list dd { margin: 0; }
+.bb-kode {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--bb-maroon);
+    background: var(--bb-maroon-soft);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+}
+.bb-qris { border: 1px solid var(--bb-line); max-width: 100%; height: auto; }
+.bb-bukti-preview { max-width: 220px; max-height: 300px; object-fit: contain; border: 1px solid var(--bb-line); }
+.bb-next-steps li { padding: 0.25rem 0; }
+
+/* ── Panel internal: kelola pesanan ─────────────────────── */
+.bb-search { min-width: min(100%, 22rem); }
+.bb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--bb-line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--bb-ink);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.bb-chip:hover { border-color: rgba(119, 27, 25, 0.35); }
+.bb-chip.active { background: var(--bb-maroon); border-color: var(--bb-maroon); color: #fff; }
+.bb-chip-count {
+    min-width: 1.4rem;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: var(--bb-maroon-soft);
+    color: var(--bb-maroon);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+.bb-chip.active .bb-chip-count { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+.bb-table { --bs-table-bg: #fff; font-size: 0.9rem; }
+.bb-table thead th {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8b8580;
+    background: #fcfbf9;
+    white-space: nowrap;
+}
+.bb-table td { padding-block: 0.85rem; }
+.bb-table.bb-loading tbody { opacity: 0.45; transition: opacity 0.15s ease; }
+.bb-kode-sm {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 700;
+    color: var(--bb-maroon);
+    white-space: nowrap;
+}
+/* Micro-interaction: baris yang baru diperbarui berkedip lembut */
+.bb-row-flash > td { animation: bb-row-flash 1.6s ease; }
+@keyframes bb-row-flash {
+    0% { background-color: #fdf0d5; }
+    100% { background-color: #fff; }
+}
+
+/* Badge status pesanan */
+.bb-status {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    background: #eee;
+    color: #555;
+}
+.bb-status-menunggu_pembayaran { background: #f1ece6; color: #6b5e55; }
+.bb-status-menunggu_verifikasi { background: #fdf0d5; color: #8a5a00; }
+.bb-status-dikonfirmasi { background: #e3eefb; color: #1f4f8a; }
+.bb-status-diproses { background: #fbe9e3; color: #9a3412; }
+.bb-status-siap { background: #e1f3ea; color: #17643f; }
+.bb-status-selesai { background: #17643f; color: #fff; }
+.bb-status-dibatalkan { background: #eee; color: #777; text-decoration: line-through; }
+
+/* Badge status pembayaran */
+.bb-pay { font-size: 0.75rem; font-weight: 600; color: #8b8580; }
+.bb-pay-menunggu_pembayaran { color: #8a5a00; }
+.bb-pay-menunggu_verifikasi { color: #8a5a00; }
+.bb-pay-diterima { color: #17643f; }
+.bb-pay-ditolak { color: var(--bb-maroon); }
+
+.bb-proof-img {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    background: #f1ece6;
+    border: 1px solid var(--bb-line);
+    border-radius: 0.75rem;
+}
+.bb-proof-empty {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    min-height: 220px;
+    background: #fcfbf9;
+    border: 1px dashed var(--bb-line);
+    border-radius: 0.75rem;
+    color: #8b8580;
+}
+.page-link { color: var(--bb-maroon); }
+.page-item.active .page-link { background: var(--bb-maroon); border-color: var(--bb-maroon); }
+
+/* ── Dashboard & laporan ────────────────────────────────── */
+.bb-stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #8b8580;
+}
+.bb-stat-value { font-size: 2.25rem; font-weight: 700; line-height: 1.1; color: var(--bb-ink); }
+.bb-stat-value-sm { font-size: 1.6rem; }
+.bb-stat-hero {
+    color: #fff;
+    border: 0;
+    border-radius: 1rem;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.12), transparent 60%),
+        var(--bb-maroon);
+}
+.bb-stat-hero .bb-stat-label { color: rgba(255, 255, 255, 0.75); }
+.bb-stat-hero .bb-stat-value { color: #fff; font-size: 2.5rem; }
+.bb-stat-alert { border-color: #f0c36d; background: #fffaf0; }
+a.bb-stat { color: inherit; }
+a.bb-stat:hover { border-color: rgba(119, 27, 25, 0.35); }
+.bb-grand-total th, .bb-grand-total td { background: #fcfbf9; border-top: 2px solid var(--bb-line); }
+.bb-loading-block { opacity: 0.45; transition: opacity 0.15s ease; }
+
+/* ── Kelola produk & kuota ──────────────────────────────── */
+.bb-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 28rem;
+}
+.bb-variant-row {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--bb-line);
+    border-radius: 0.75rem;
+    background: #fcfbf9;
+}
+.bb-variant-list li {
+    display: grid;
+    grid-template-columns: minmax(4.5rem, auto) 5.5rem auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.15rem 0;
+}
+.bb-quota-input { width: 8.5rem; }
+.bb-progress { height: 0.5rem; background: #f1ece6; }
+.bb-progress .progress-bar { background: var(--bb-maroon); }
+.bb-progress .bb-progress-full { background: var(--bb-maroon-dark); }
+.bb-row-past td { color: #8b8580; }
+
+/* ── Kelola pengguna ────────────────────────────────────── */
+.bb-role { font-weight: 600; }
+.bb-role-admin { background: var(--bb-maroon); color: #fff; }
+.bb-role-koordinator { background: #fbe9e3; color: #9a3412; }
+.bb-role-staf { background: #e3eefb; color: #1f4f8a; }
+.bb-role-card { color: inherit; }
+.bb-role-card.is-active { border-color: var(--bb-maroon); box-shadow: inset 0 0 0 1px var(--bb-maroon); }
+fieldset:disabled .bb-option { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Lacak pesanan: timeline vertikal ───────────────────── */
+.bb-kode-input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+.bb-timeline { list-style: none; margin: 0; padding: 0; }
+.bb-tl-item { position: relative; display: flex; gap: 1rem; padding-bottom: 1.5rem; }
+.bb-tl-item:last-child { padding-bottom: 0; }
+/* Garis penghubung antar langkah */
+.bb-tl-item::before {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 2.1rem;
+    bottom: 0.1rem;
+    width: 2px;
+    transform: translateX(-50%);
+    background: var(--bb-line);
+}
+.bb-tl-item:last-child::before { display: none; }
+.bb-tl-item.is-done::before { background: var(--bb-maroon); }
+.bb-tl-dot {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 2px solid var(--bb-line);
+    background: #fff;
+    color: #b8b1aa;
+    font-size: 0.85rem;
+}
+.is-done .bb-tl-dot { background: var(--bb-maroon); border-color: var(--bb-maroon); color: #fff; }
+.is-current .bb-tl-dot {
+    border-color: var(--bb-maroon);
+    color: var(--bb-maroon);
+    animation: bb-pulse 1.8s ease-in-out infinite; /* micro-interaction: langkah aktif "berdenyut" */
+}
+.is-cancelled .bb-tl-dot { background: #6b5e55; border-color: #6b5e55; color: #fff; }
+.bb-tl-body { flex: 1; padding-top: 0.2rem; }
+.bb-tl-label { font-weight: 600; }
+.is-current .bb-tl-label { color: var(--bb-maroon); }
+.is-upcoming .bb-tl-label, .is-upcoming .bb-tl-desc { color: #a59d96; }
+.bb-tl-time { font-size: 0.8rem; color: #8b8580; }
+.bb-tl-desc { font-size: 0.875rem; color: #6b5e55; }
+@keyframes bb-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(119, 27, 25, 0.14); }
+    50% { box-shadow: 0 0 0 8px rgba(119, 27, 25, 0.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .is-current .bb-tl-dot { animation: none; box-shadow: 0 0 0 4px rgba(119, 27, 25, 0.14); }
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.bb-footer { border-top: 1px solid var(--bb-line); background: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-maroon, .btn-outline-maroon, .bb-card, .bb-product-img img { transition: none; }
+    .btn-maroon:hover, .btn-outline-maroon:hover, .bb-product:hover .bb-product-img img { transform: none; }
+    .bb-bump, .bb-row-flash > td { animation: none; }
+}
